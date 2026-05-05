@@ -1,0 +1,67 @@
+{
+  "name": "prod-express-template",
+  "version": "1.0.0",
+  "description": "An Express.js production ready template with typescript, ESLint and Prettier configured",
+  "main": "index.js",
+  "type": "module",
+  "imports": {
+    "#*": "./src/*"
+  },
+  "scripts": {
+    "dev": "tsx --watch --env-file .env src/index.ts",
+    "dev:staging": "tsx --watch --env-file .env.staging src/index.ts",
+    "dev:prod": "tsx --watch --env-file .env.production src/index.ts",
+    "start": "node --env-file .env dist/index.js",
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest run --coverage",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --check"
+    ],
+    "*.{json,yml,yaml,md}": [
+      "prettier --check"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiftBanda/prod-express-template.git"
+  },
+  "keywords": [],
+  "author": "Gift Banda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GiftBanda/prod-express-template/issues"
+  },
+  "homepage": "https://github.com/GiftBanda/prod-express-template#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tsconfig/node22": "^22.0.5",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "@vitest/eslint-plugin": "^1.6.16",
+    "eslint": "^10.3.0",
+    "eslint-plugin-perfectionist": "^5.9.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.2",
+    "vitest": "^4.1.5"
+  }
+}
