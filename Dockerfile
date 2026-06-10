@@ -15,5 +15,5 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 
 ENV NODE_ENV=development
-EXPOSE 3000
+EXPOSE 5000
 CMD ["node", "dist/index.js"]

@@ -68,7 +68,7 @@ class AuthService {
     if (existing) throw new AppError(`Email already in use`, 409);
 
     const hashed = await bcrypt.hash(password, 10);
-    const newUser = { email, fullName: name, id: createId(), password: hashed };
+    const newUser = { email, fullName: name, id: createId(), password: hashed, createdAt: null, updatedAt: null };
     const [created] = await addUser(newUser);
 
     return { ...signTokens(created.id, created.email), user: { email: created.email, id: created.id } };

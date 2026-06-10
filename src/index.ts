@@ -1,5 +1,5 @@
 import cors from "cors";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import "dotenv/config";
 import helmet from "helmet";
 
@@ -11,7 +11,7 @@ import { rateLimiter } from "./middleware/rate-limit.js";
 const app = express();
 const PORT = process.env.PORT!;
 
-const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:3000", "https://app.com", "https://admin.app.com"];
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:3000"];
 
 app.use(
   cors({
@@ -32,7 +32,7 @@ app.use(express.json());
 app.use("/api/v1", authRoutes);
 
 // Error handling middleware (must be last)
-app.use((err: Error, req: Request, res: Response) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({ message: err.message });
   }

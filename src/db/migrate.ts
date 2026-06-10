@@ -3,8 +3,6 @@ import dotenvExpand from "dotenv-expand";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { Pool } from "pg";
 
-// @/db/migrate.ts
-import config from "../../drizzle.config.js";
 import { db } from "./index.js";
 
 dotenvExpand.expand(loadEnv());
@@ -19,13 +17,9 @@ const pool = new Pool({
   connectionString: databaseUrl,
 });
 
-// const db = drizzle(pool);
-
 async function main() {
-  if (config.out) {
-    await migrate(db, { migrationsFolder: config.out });
-    console.log("Migration done!");
-  }
+  await migrate(db, { migrationsFolder: "./drizzle/migrations" });
+  console.log("Migration done!");
 }
 
 main()
