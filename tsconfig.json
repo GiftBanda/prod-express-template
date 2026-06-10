@@ -2,7 +2,16 @@
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./"
+    "rootDir": "./",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "#modules/*": ["./src/modules/*"],
+      "#db/*": ["./src/db/*"],
+      "#shared/*": ["./src/shared/*"],
+      "#utils/*": ["./src/utils/*"],
+      "#middleware/*": ["./src/middleware/*"],
+      "#lib/*": ["./src/lib/*"]
+    }
   },
   "include": ["**/*.ts"],
   "exclude": ["dist"]
