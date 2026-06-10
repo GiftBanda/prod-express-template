@@ -68,14 +68,14 @@ class AuthService {
     if (existing) throw new AppError(`Email already in use`, 409);
 
     const hashed = await bcrypt.hash(password, 10);
-    const newUser = { email, fullName: name, id: createId(), password: hashed, createdAt: null, updatedAt: null };
+    const newUser = { createdAt: null, email, fullName: name, id: createId(), password: hashed, updatedAt: null };
     const [created] = await addUser(newUser);
 
     return { ...signTokens(created.id, created.email), user: { email: created.email, id: created.id } };
   }
 
   async resetPassword(token: string, newPassword: string) {
-    const userId = (await redis.get(`${REDIS_PREFIX}${token}`)) as string;
+    const userId = await redis.get(`${REDIS_PREFIX}${token}`);
 
     if (!userId) {
       throw new AppError("Reset token is invalid or has expired", 400);
